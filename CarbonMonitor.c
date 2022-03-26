@@ -6,26 +6,10 @@ void addData(float x[5], float y[5], float newX, float newY);
 
 int main()
 {
-    float x[5] = {-1, -1, -1, -1, -1}, y[5] = {-1, -1, -1, -1, -1};
-    for (int i = 0; i < 5; i++)
-    {
-        addData(x, y, i+1, i+2);
-    }
-    float slope = linearRegression(x, y); 
+    float x[5] = {-1, -1, -1, -1, -1}, y[5] = {-1, -1, -1, -1, -1}; // preset array of size 5 so each value has -1
     float newX, newY; // for newest data point
-    newX = 25;
-    newY = 25;
-    for(int i = 0; i < 5; i++)
-    {
-        printf("\nx is: %f ", x[i]);
-        printf("and y is: %f", y[i]);
-    }
-    addData(x, y, newX, newY);
-    for(int i = 0; i < 5; i++)
-    {
-        printf("\nx is: %f ", x[i]);
-        printf("and y is: %f", y[i]);
-    }
+    addData(x, y, newX, newY); // adding new data to the back, and removing old data from the front of the array
+    float slope = linearRegression(x, y);  // finding linear regression
 }
 
 float linearRegression(const float x[5], const float y[5])
