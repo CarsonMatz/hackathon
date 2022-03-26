@@ -117,5 +117,12 @@ void lcd_writenibble(unsigned char lcdbits)
     PORTB |= (1 << PB1);
     PORTB |= (1 << PB1);
     PORTB &= ~(1 << PB1);
-
 }
+
+// lcd_clear - Clear the desired row of the LCD display
+void lcd_clear(int row){
+    char clear[20] = "                   ";
+    lcd_moveto(row,0);
+    lcd_stringout(clear);
+}
+
