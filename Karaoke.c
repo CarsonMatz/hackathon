@@ -1,16 +1,16 @@
-#include <string>
 #include <stdio.h>
+#include <stdlib.h>
 #include "lcd.h"
 
-struct {Song}
+struct Song
 {
-    string name;
-    string lyrics[500] = "";
+    char* name;
+    char* lyrics[500];
     Song* nextSong;
     Song* prevSong;
 };
 
-struct {List}
+struct List
 {
     Song* head;
     Song* tail;
@@ -170,7 +170,7 @@ int main(int argc, char* argv[])
     {
         for (int i = 0; i < argc; i++)
         {
-            readFile(argv[i]);
+            readFile(argv[i], songList);
         }
         runKaraoke();
     }
