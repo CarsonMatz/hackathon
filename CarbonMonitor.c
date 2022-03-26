@@ -1,38 +1,45 @@
 #include <stdio.h>
 #include <time.h>
 
-float linearRegression(const float x[5], const float y[5]);
-void addData(float x[5], float y[5], float newX, float newY);
+float linearRegression(const float* x, const float* y, int n);
+void addData(float* x, float* y, float newX, float newY, int n);
 
 int main()
 {
-    float x[5] = {-1, -1, -1, -1, -1}, y[5] = {-1, -1, -1, -1, -1}; // preset array of size 5 so each value has -1
+    int n = 20;
+    float x[n], y[n];
+    for (int i = 0; i < n; i++)
+    {
+        x[i] = -1;
+        y[i] = -1;
+    } // preset array of size n so each value has -1
     float newX, newY; // for newest data point
-    addData(x, y, newX, newY); // adding new data to the back, and removing old data from the front of the array
-    float slope = linearRegression(x, y);  // finding linear regression
+    addData(x, y, newX, newY, n); // adding new data to the back, and removing old data from the front of the array
+    float slope = linearRegression(x, y, n);  // finding linear regression
 }
 
-float linearRegression(const float x[5], const float y[5])
+
+float linearRegression(const float* x, const float* y, int n)
 {
     float sumX = 0;
     float sumX2 = 0;
     float sumY = 0;
     float sumXY = 0;
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < n; i++)
     {
         sumX = sumX + x[i];
         sumX2 = sumX2 + x[i]*x[i];
         sumY = sumY + y[i];
         sumXY = sumXY + x[i]*y[i];
     }
-     return (5*sumXY-sumX*sumY)/(5*sumX2-sumX*sumX);
+     return (n*sumXY-sumX*sumY)/(n*sumX2-sumX*sumX);
 }
 
-void addData(float x[5], float y[5], float newX, float newY)
+void addData(float* x, float* y, float newX, float newY, int n)
 {
-    if (x[4] == -1)
+    if (x[n-1] == -1)
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < n; i++)
         {
             if (x[i] == -1)
             {
@@ -43,13 +50,12 @@ void addData(float x[5], float y[5], float newX, float newY)
     }
     else
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < n; i++)
         {
             x[i] = x[i+1];
             y[i] = y[i+1];
         }
-        x[4] = newX;
-        y[4] = newY;
+        x[n-1] = newX;
+        y[n-1] = newY;
     }
-    
 }
